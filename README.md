@@ -1,44 +1,52 @@
 # Space Rental Booking (Flutter)
 
-A product-grade Flutter starter app for booking micro-spaces such as **backyards, dunkyards, parking spaces, and grounds**.
+A production-oriented Flutter app foundation for booking **backyards, dunkyards, parking spaces, and grounds**.
 
 ## Android compatibility
 
-This project is configured to support:
-- **Minimum:** Android 9 (API 28)
-- **Target/Compile:** Android 15+ toolchain target (`targetSdk`/`compileSdk` set to 35)
+- **Minimum supported:** Android 9 (API 28)
+- **Compile/target SDK:** 35 (forward-compatible baseline for Android 15/16 cycles)
 
-This setup is ready to stay compatible across Android 9 through newer Android versions (including Android 16 previews) with routine SDK updates.
+## What's included in this branch (`feature/next-milestones`)
 
-## Core product modules
+### 1) Map discovery + location permissions
+- Google Maps powered discovery view with map/list toggle
+- Runtime location permission flow (via `geolocator`)
+- Listing markers with category and price context
 
-- **Marketplace Discovery:** category cards, search/filter-ready home scaffold
-- **Booking Foundation:** slot-based booking flow placeholder
-- **Owner Operations:** future-ready hooks for listing management and earnings dashboard
-- **Trust Layer:** ratings, verification, and policy surfaces planned into UX sections
+### 2) Authentication with owner/renter roles
+- Role-based sign-in scaffold (`renter`, `owner`)
+- Simple auth service abstraction, ready to swap with Firebase/OAuth backend
 
-## Architecture direction
+### 3) Payments, refunds, and payouts orchestration
+- Payment intent simulation surface
+- Refund request flow (policy-aware)
+- Owner payout request flow
+- Service boundaries designed for real gateway integration
 
-Recommended expansion path:
+### 4) AI-assisted dynamic pricing recommendations
+- Host console with configurable pricing inputs
+- Heuristic recommendation engine for weekend/event/occupancy-aware pricing
+- ML-ready service boundary (`PricingService`) for future model integration
 
-1. `presentation/` for screens, widgets, and state management
-2. `domain/` for entities + use cases (Booking, Listing, Pricing)
-3. `data/` for repositories and API/Firebase integrations
-4. `core/` for shared components, error models, and utilities
+## Recommended next additions
 
-## Run locally
+1. **Backend contracts first**
+   - Define API schema for bookings, payout ledgers, and refund states.
+2. **Secure auth in production**
+   - Implement token-based auth with role claims enforced server-side.
+3. **Payments hardening**
+   - Add webhook ingestion, idempotency keys, and reconciled transaction ledger.
+4. **Observability**
+   - Add event telemetry (search → booking funnel, refund rates, payout latency).
+5. **AI evolution**
+   - Upgrade heuristic model to trained dynamic pricing model with offline + online evaluation.
 
-1. Install Flutter SDK (stable channel, Dart 3.4+)
-2. Run:
+## Setup
 
 ```bash
 flutter pub get
 flutter run
 ```
 
-## Next milestones
-
-- Integrate map-based discovery and location permissions
-- Add authentication (owner/renter roles)
-- Introduce payment, refunds, and payout orchestration
-- Add AI-assisted dynamic pricing recommendations
+> Add your Google Maps API key in `android/app/src/main/AndroidManifest.xml` under `com.google.android.geo.API_KEY`.
